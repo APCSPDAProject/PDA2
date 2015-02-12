@@ -120,9 +120,9 @@ public class FireBaseUtils {
 		}
 	}
 
-	ArrayList<String> users = new ArrayList<String>();
+	static ArrayList<String> users = new ArrayList<String>();
 
-	public boolean createUser(String userName, String password, String age) {
+	public static boolean createUser(String userName, String password, String age) {
 
 		firebase.child("Users").addValueEventListener(new ValueEventListener() {
 			@Override
@@ -170,7 +170,7 @@ public class FireBaseUtils {
 
 	}
 
-	public boolean checkLogin(final String userName, final String password) {
+	public static boolean checkLogin(final String userName, final String password) {
 
 		firebase.child("Users").addValueEventListener(new ValueEventListener() {
 			@Override
