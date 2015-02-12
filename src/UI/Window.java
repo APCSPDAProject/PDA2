@@ -20,8 +20,8 @@ public class Window extends JFrame {
 
 	public ChatPanel chat = new ChatPanel();
 	JScrollPane scroll = new JScrollPane();
-public	JScrollPane scrollChat = new JScrollPane();
-	 public ChatInput CI = new ChatInput();
+	public	JScrollPane scrollChat = new JScrollPane();
+	public ChatInput CI = new ChatInput();
 	PeoplePanel p = new PeoplePanel();
 	
 		
@@ -55,7 +55,7 @@ public	JScrollPane scrollChat = new JScrollPane();
 	
 		
 		pack();
-		setVisible(true);
+		setVisible(false);
 		
 	}
 	

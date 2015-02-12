@@ -53,4 +53,38 @@ public class StartupMessages {
 			"Legalize gay marijuana!"
 	};
 	
+	public static String[] StartupNames = new String[]{
+		
+		"Suzy",
+		"Carlton",
+		"ScarFace",
+		"Money Maker Mike",
+		"Jacob",
+		"Barry",
+		"Other Jacob",
+		"Elliot",
+		"Ray Narvaez Jr.",
+		"Trihex",
+		"Ico",
+		"Riku",
+		"'Lil B",
+		"Soulja Boy",
+		
+	};
+	
+	public static String[] StartupPasswords = new String[]{
+		
+		"1234",
+		"Password",
+		"Spot97",
+		"YOLOSWAG420",
+		"asdfghjkl",
+		"Admin",
+		"OpenUp",
+		"ILuvCS",
+		"Jaffe4Lyfe",
+		
+		
+	};
+	
 }
