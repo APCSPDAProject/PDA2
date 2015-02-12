@@ -18,7 +18,12 @@ public class FireBaseUtils {
 	public static long count;
 
 	public static String myName = "testName";
+
+	public static int MaxAge, MinAge;
+
 	public static boolean initReciever;
+
+	private static String userPass;
 
 	public static void init() {
 		firebase = new Firebase("https://pda.firebaseio.com/");
@@ -27,22 +32,21 @@ public class FireBaseUtils {
 
 	public static void setChat(String name2) {
 		firebase = new Firebase("https://pda.firebaseio.com/");
-		
-		initReciever=false;
+
+		initReciever = false;
 		Main.window.chat.removeAll();
-		Main.window.chat.repaint(); 
-		Main.window.chat.revalidate(); 
+		Main.window.chat.repaint();
+		Main.window.chat.revalidate();
 		chatName = (myName.compareTo(name2) == 1) ? (myName + name2)
 				: (name2 + myName);
 		getChildCount();
 		System.out.println(chatName);
-		
-		if(!initReciever){
-		receiveMessage();
-		
+
+		if (!initReciever) {
+			receiveMessage();
+
 		}
-		
-		
+
 	}
 
 	public static void SendMessage(String data) {
@@ -56,7 +60,7 @@ public class FireBaseUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public static void receiveMessage() {
@@ -67,17 +71,17 @@ public class FireBaseUtils {
 
 				ArrayList<String> messages = (ArrayList<String>) snapshot
 						.getValue();
-				if (messages != null&&!initReciever) {
+				if (messages != null && !initReciever) {
 					for (String m : messages) {
-					
-						 Main.window.chat.UpdateChat("NotMe: test");
+
+						Main.window.chat.UpdateChat("NotMe: test");
 						Main.window.chat.UpdateChat(m);
 						// System.out.println(m);
-						initReciever=true;
+						initReciever = true;
 					}
-				}else {
-					Main.window.chat.UpdateChat(messages.get(messages
-							.size() - 1));
+				} else {
+					Main.window.chat
+							.UpdateChat(messages.get(messages.size() - 1));
 				}
 
 			}
@@ -90,10 +94,9 @@ public class FireBaseUtils {
 		};
 
 		firebase.child("Chats").child(chatName).addValueEventListener(value);
-		//firebase.child("Chats").child(chatName).removeEventListener(value);
+		// firebase.child("Chats").child(chatName).removeEventListener(value);
 	}
 
-	
 	public static void getChildCount() {
 
 		firebase.child("Chats").child(chatName)
@@ -115,6 +118,91 @@ public class FireBaseUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	ArrayList<String> users = new ArrayList<String>();
+
+	public boolean createUser(String userName, String password, String age) {
+
+		firebase.child("Users").addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot snapshot) {
+				if ((ArrayList<String>) snapshot.getValue() != null) {
+					users = (ArrayList<String>) snapshot.getValue();
+				}
+			}
+
+			@Override
+			public void onCancelled(FirebaseError arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (String s : users) {
+
+			if (s.startsWith(userName + ","))
+				return false;
+			else
+				break;
+
+		}
+
+		userPass = userName + "," + password;
+		firebase.child("Users").child(userName + "," + password).child("age")
+				.setValue(age);
+
+		firebase.child("Users").child(userName + "," + password)
+				.child("MinAge")
+				.setValue(Math.ceil((Float.parseFloat(age) / 2) + 7));
+
+		firebase.child("Users").child(userName + "," + password)
+				.child("MaxAge")
+				.setValue(Math.floor((Float.parseFloat(age) - 7) * 2));
+
+		return true;
+
+	}
+
+	public boolean checkLogin(final String userName, final String password) {
+
+		firebase.child("Users").addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot snapshot) {
+				if ((ArrayList<String>) snapshot.getValue() != null) {
+					users = (ArrayList<String>) snapshot.getValue();
+				}
+			}
+
+			@Override
+			public void onCancelled(FirebaseError arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (String s : users) {
+
+			if (s.startsWith(userName + ",")) {
+				return true;
+
+			}
+		}
+
+		return false;
+
 	}
 
 }
