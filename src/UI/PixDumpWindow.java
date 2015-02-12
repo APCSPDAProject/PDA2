@@ -35,6 +35,7 @@ public class PixDumpWindow extends JFrame {
             props.put("controlColorLight", "10 10 10");
             props.put("controlColorDark", "10 10 10"); 
 
+            props.put("buttonForegroundColor", "200 200 200");
             props.put("buttonColor", "10 10 10");
             props.put("buttonColorLight", "10 10 10");
             props.put("buttonColorDark", "10 10 10");
