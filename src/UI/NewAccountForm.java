@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import FBUtils.FireBaseUtils;
 import Main.Main;
 
 import com.firebase.client.Firebase;
@@ -61,7 +62,7 @@ public class NewAccountForm extends javax.swing.JFrame {
         create.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-					//NewAccountCreation.createAccount(username.getText(), password.getText());
+				FireBaseUtils.createUser(username.getText(), password.getText(), "4");
 				setVisible(false);
 				Main.l.setVisible(true);
 			}

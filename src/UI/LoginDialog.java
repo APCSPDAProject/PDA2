@@ -9,6 +9,8 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import FBUtils.FireBaseUtils;
+
 
 
 public class LoginDialog extends JFrame  {
@@ -79,10 +81,10 @@ public class LoginDialog extends JFrame  {
 		Submit.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				/*if (FireBaseUtils.checkLogin()) {
+				if (FireBaseUtils.checkLogin(userNameField.getText(),passwordField.getText())) {
 					setVisible(false);
 					Main.Main.window.setVisible(true);
-				}*/
+				}
 			}
 		});
 		NewAcount = new JButton();
